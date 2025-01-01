@@ -1,0 +1,36 @@
+version: v1beta1
+kind: Spicepod
+name: plasticlist
+
+datasets:
+  # - from: https://www.plasticlist.org/downloads/samples.tsv
+  #   name: samples
+  #   description: plasticlist.org samples dataset (2024) accelerated with Spice
+  #   params:
+  #     file_format: csv
+  #     csv_delimiter: '\t'
+  #   acceleration:
+  #     enabled: true
+
+  - from: file:///Users/lukim/Downloads/samples.tsv
+    name: samples_file
+    description: plasticlist.org samples dataset (2024)
+
+models:
+  - from: openai:gpt-4o
+    name: gpt4o
+    description: OpenAI GPT-4o model
+    params:
+      tools: auto, memory
+      openai_api_key: ${ secrets:OPENAI_API_KEY }
+    embeddings:
+      - column: product
+        column_pk:
+          - id
+        use: openai_embeddings
+
+embeddings:
+  - from: openai
+    name: openai_embeddings
+    params:
+      openai_api_key: ${ secrets:OPENAI_API_KEY }

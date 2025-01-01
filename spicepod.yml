@@ -15,27 +15,36 @@ datasets:
     metadata:
       instructions: |
         The `samples` dataset contains a list of samples from plasticlist.org.
-
-        Key columns are:
-
-        - `id` being the sample unique `id`
-        - `product` which normally includes brand, name, and description.
-        - `tags` being the tags associated with the product.
-        - `DEHP_equivalents_ng_g` and `DEHP_ng_g` being Bis(2-ethylhexyl) phthalate (DEHP).
-        - `DBP_ng_g` being Dibutyl phthalate (DBP).
-        - `BBP_ng_g` being Benzyl butyl phthalate (BBP).
-        - `BBP_ng_g` being Diisobutyl phthalate (DIBP).
-        - `DINP_ng_g` being Diisononyl phthalate (DINP).
-        - `DIDP_ng_g` being Diisodecyl phthalate (DIDP).
-        - `BPA_ng_g` being Bisphenol A (BPA).
-        - `BPS_ng_g` being Bisphenol S (BPS).
+      reference_url_template: https://www.plasticlist.org/product/<product_id>
 
     columns:
+      - name: id
+        description: Sample unique ID
       - name: product
-        description: The product tested
+        description: The product tested including brand, name, and description
         embeddings:
           - from: openai_embeddings
-            row_id: id
+            row_id: product_id
+      - name: tags
+        description: Tags associated with the product
+      - name: DEHP_equivalents_ng_g
+        description: Bis(2-ethylhexyl) phthalate (DEHP) equivalents in ng/g
+      - name: DEHP_ng_g
+        description: Bis(2-ethylhexyl) phthalate (DEHP) in ng/g
+      - name: DBP_ng_g
+        description: Dibutyl phthalate (DBP) in ng/g
+      - name: BBP_ng_g
+        description: Benzyl butyl phthalate (BBP) in ng/g
+      - name: DIBP_ng_g
+        description: Diisobutyl phthalate (DIBP) in ng/g
+      - name: DINP_ng_g
+        description: Diisononyl phthalate (DINP) in ng/g
+      - name: DIDP_ng_g
+        description: Diisodecyl phthalate (DIDP) in ng/g
+      - name: BPA_ng_g
+        description: Bisphenol A (BPA) in ng/g
+      - name: BPS_ng_g
+        description: Bisphenol S (BPS) in ng/g
 
 models:
   - from: openai:gpt-4o
@@ -46,6 +55,10 @@ models:
       openai_api_key: ${ secrets:OPENAI_API_KEY }
       system_prompt: |
         You are an AI assistant created by Spice AI (spice.ai) helping a user with a question about plastic chemicals in food products based on the plasticlist.org `samples` dataset.
+
+        Always be specific and provide the data in answers.
+
+        When referencing products, favor the aggregate of samples for each unique product and provide the plasticlist.org URL as a citation.
 
         ## Attribution
         PlasticList. 'Data on Plastic Chemicals in Bay Area Foods'. plasticlist.org. Accessed Dec 31, 2024.

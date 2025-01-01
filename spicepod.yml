@@ -26,6 +26,11 @@ models:
         embeddings:
           - from: openai_embeddings
             row_id: id
+      - name: product	tags
+        description: The tags of the product
+        embeddings:
+          - from: openai_embeddings
+            row_id: id
 
 embeddings:
   - from: openai

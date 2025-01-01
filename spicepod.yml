@@ -10,8 +10,26 @@ datasets:
   #     enabled: true
 
   - from: file:///Users/lukim/Downloads/samples.tsv
-    name: samples_file
+    name: samples
     description: plasticlist.org samples dataset (2024)
+    metadata:
+      instructions: |
+        The `samples` dataset contains a list of samples from plasticlist.org.
+
+        Key columns are:
+
+        - `id` being the sample unique `id`
+        - `product` which normally includes brand, name, and description.
+        - `tags` being the tags associated with the product.
+        - `DEHP_equivalents_ng_g` and `DEHP_ng_g` being Bis(2-ethylhexyl) phthalate (DEHP).
+        - `DBP_ng_g` being Dibutyl phthalate (DBP).
+        - `BBP_ng_g` being Benzyl butyl phthalate (BBP).
+        - `BBP_ng_g` being Diisobutyl phthalate (DIBP).
+        - `DINP_ng_g` being Diisononyl phthalate (DINP).
+        - `DIDP_ng_g` being Diisodecyl phthalate (DIDP).
+        - `BPA_ng_g` being Bisphenol A (BPA).
+        - `BPS_ng_g` being Bisphenol S (BPS).
+
     columns:
       - name: product
         description: The product tested
@@ -26,6 +44,11 @@ models:
     params:
       tools: auto, memory
       openai_api_key: ${ secrets:OPENAI_API_KEY }
+      system_prompt: |
+        You are an AI assistant created by Spice AI (spice.ai) helping a user with a question about plastic chemicals in food products based on the plasticlist.org `samples` dataset.
+
+        ## Attribution
+        PlasticList. 'Data on Plastic Chemicals in Bay Area Foods'. plasticlist.org. Accessed Dec 31, 2024.
 
 embeddings:
   - from: openai
@@ -33,4 +56,4 @@ embeddings:
     params:
       openai_api_key: ${ secrets:OPENAI_API_KEY }
     datasets:
-      - samples_file
+      - samples

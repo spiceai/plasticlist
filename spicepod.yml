@@ -20,14 +20,17 @@ models:
     params:
       tools: auto, memory
       openai_api_key: ${ secrets:OPENAI_API_KEY }
-    embeddings:
-      - column: product
-        column_pk:
-          - id
-        use: openai_embeddings
+    columns:
+      - name: product
+        description: The product tested
+        embeddings:
+          - from: openai_embeddings
+            row_id: id
 
 embeddings:
   - from: openai
     name: openai_embeddings
     params:
       openai_api_key: ${ secrets:OPENAI_API_KEY }
+    datasets:
+      - samples_file

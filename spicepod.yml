@@ -12,14 +12,6 @@ datasets:
   - from: file:///Users/lukim/Downloads/samples.tsv
     name: samples_file
     description: plasticlist.org samples dataset (2024)
-
-models:
-  - from: openai:gpt-4o
-    name: gpt4o
-    description: OpenAI GPT-4o model
-    params:
-      tools: auto, memory
-      openai_api_key: ${ secrets:OPENAI_API_KEY }
     columns:
       - name: product
         description: The product tested
@@ -31,6 +23,14 @@ models:
         embeddings:
           - from: openai_embeddings
             row_id: id
+
+models:
+  - from: openai:gpt-4o
+    name: gpt4o
+    description: OpenAI GPT-4o model
+    params:
+      tools: auto, memory
+      openai_api_key: ${ secrets:OPENAI_API_KEY }
 
 embeddings:
   - from: openai

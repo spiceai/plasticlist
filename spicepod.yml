@@ -23,12 +23,12 @@ datasets:
         product_id: 1 -> https://www.plasticlist.org/product/1
         product_id: 123 -> https://www.plasticlist.org/product/123
 
-        Provide product image url using product_id and https://www.plasticlist.org/images/product/XXXX.jpg template, where XXXX is zero-padded product_id, e.g.
-        product_id: 1 -> https://www.plasticlist.org/images/product/0001.jpg
-        product_id: 123 -> https://www.plasticlist.org/images/product/0123.jpg
+        Provide product image url using product_id and https://www.plasticlist.org/images/products/<XXXX>.jpg template, where XXXX is zero-padded product_id, e.g.
+        product_id: 1 -> https://www.plasticlist.org/images/products/0001.jpg
+        product_id: 123 -> https://www.plasticlist.org/images/products/0123.jpg
 
       reference_url_template: https://www.plasticlist.org/product/<product_id>
-      image_url_template: https://www.plasticlist.org/images/product/<XXXX>.jpg
+      image_url_template: https://www.plasticlist.org/images/products/<XXXX>.jpg
 
     columns:
       - name: id

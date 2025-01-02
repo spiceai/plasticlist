@@ -9,13 +9,12 @@ datasets:
   #   acceleration:
   #     enabled: true
 
-  - from: file:./samples.tsv
+  # - from: file:./samples.csv
+  - from: https://raw.githubusercontent.com/ewgenius/plasticlist/refs/heads/main/samples.csv
     name: samples
     description: plasticlist.org samples dataset (2024)
     acceleration:
       enabled: true
-      engine: duckdb
-      mode: file
     metadata:
       instructions: |
         The `samples` dataset contains a list of samples from plasticlist.org.

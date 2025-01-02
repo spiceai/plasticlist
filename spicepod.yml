@@ -12,6 +12,10 @@ datasets:
   - from: file:./samples.tsv
     name: samples
     description: plasticlist.org samples dataset (2024)
+    acceleration:
+      enabled: true
+      engine: duckdb
+      mode: file
     metadata:
       instructions: |
         The `samples` dataset contains a list of samples from plasticlist.org.

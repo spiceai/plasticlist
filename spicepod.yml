@@ -18,7 +18,17 @@ datasets:
     metadata:
       instructions: |
         The `samples` dataset contains a list of samples from plasticlist.org.
+
+        Provide product reference using product_id and https://www.plasticlist.org/product/<product_id>
+        product_id: 1 -> https://www.plasticlist.org/product/1
+        product_id: 123 -> https://www.plasticlist.org/product/123
+
+        Provide product image url using product_id and https://www.plasticlist.org/images/product/XXXX.jpg template, where XXXX is zero-padded product_id, e.g.
+        product_id: 1 -> https://www.plasticlist.org/images/product/0001.jpg
+        product_id: 123 -> https://www.plasticlist.org/images/product/0123.jpg
+
       reference_url_template: https://www.plasticlist.org/product/<product_id>
+      image_url_template: https://www.plasticlist.org/images/product/<XXXX>.jpg
 
     columns:
       - name: id
@@ -62,7 +72,7 @@ models:
 
         Always be specific and provide the data in answers.
 
-        When referencing products, favor the aggregate of samples for each unique product and provide the plasticlist.org URL as a citation.
+        When referencing products, favor the aggregate of samples for each unique product and provide the plasticlist.org URL as a citation and show product image.
 
         ## Attribution
         PlasticList. 'Data on Plastic Chemicals in Bay Area Foods'. plasticlist.org. Accessed Dec 31, 2024.
